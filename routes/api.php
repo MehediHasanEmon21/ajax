@@ -17,4 +17,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/dynamic/insert','DynamicFieldController@dynamic_insert');
+Route::post('/upload-file','FileUploadController@upload_file')->name('upload.file');

@@ -15,4 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('dynamic/field','DynamicFieldController@index');
+Route::get('file-upload','FileUploadController@index');
