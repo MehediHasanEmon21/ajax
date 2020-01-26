@@ -1,41 +1,29 @@
 $(document).ready(function(){
 
 
-	$('form').ajaxForm({
-
-		beforeSend:function(){
-
-			$('#success').empty();
-
-		},
-
-		uploadProgress:function(event, position, total, percentComplete)
-	     {
-	        $('.progress-bar').text(percentComplete + '%');
-	        $('.progress-bar').css('width', percentComplete + '%');
-	     },
-
-		success:function(data){
-
-		if(data.errors)
+	$(document).ready(function(){
+    $('form').ajaxForm({
+        beforeSend:function(){
+            $('#success').empty();
+            $('.progress-bar').text('0%');
+            $('.progress-bar').css('width', '0%');
+        },
+        uploadProgress:function(event, position, total, percentComplete){
+            $('.progress-bar').text(percentComplete + '0%');
+            $('.progress-bar').css('width', percentComplete + '0%');
+        },
+        success:function(data)
         {
-          $('.progress-bar').text('0%');
-          $('.progress-bar').css('width', '0%');
-          $('#success').html('<span class="text-danger"><b>'+data.errors+'</b></span>');
+            if(data.success)
+            {
+                $('#success').html('<div class="text-success text-center"><b>'+data.success+'</b></div><br /><br />');
+                $('#success').append(data.image);
+                $('.progress-bar').text('Uploaded');
+                $('.progress-bar').css('width', '100%');
+            }
         }
-        if(data.success)
-        {
-          $('.progress-bar').text('Uploaded');
-          $('.progress-bar').css('width', '100%');
-          $('#success').html('<span class="text-success"><b>'+data.success+'</b></span><br /><br />');
-          $('#success').append(data.image);
-        }
-
-
-		}
-
-
-	});
+    });
+});
 
 
 

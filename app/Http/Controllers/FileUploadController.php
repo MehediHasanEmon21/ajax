@@ -16,28 +16,21 @@ class FileUploadController extends Controller
 
 
 
-     $rules = array(
-      'file'  => 'required|image'
-     );
-
-     $error = Validator::make($request->all(), $rules);
-
-     if($error->fails())
+     $image_code = '';
+     $images = $request->file('file');
+     foreach($images as $image)
      {
-      return response()->json(['errors' => $error->errors()->all()]);
+      $new_name = rand() . '.' . $image->getClientOriginalExtension();
+      $image->move(public_path('images'), $new_name);
+      $image_code .= '<div class="col-md-3" style="margin-bottom:24px;"><img src="/images/'.$new_name.'" class="img-thumbnail" /></div>';
      }
 
-     $image = $request->file('file');
-
-     $new_name = rand() . '.' . $image->getClientOriginalExtension();
-     $image->move(public_path('images'), $new_name);
-
      $output = array(
-         'success' => 'Image uploaded successfully',
-         'image'  => '<img src="/images/'.$new_name.'" class="img-thumbnail" />'
-        );
+      'success'  => 'Images uploaded successfully',
+      'image'   => $image_code
+     );
 
-    return response()->json($output);
+     return response()->json($output);
 
 
    }
