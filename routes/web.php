@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::get('file-upload','FileUploadController@index');
+Route::get('show/password','TestController@show_password_field');
