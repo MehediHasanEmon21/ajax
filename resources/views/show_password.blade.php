@@ -10,22 +10,54 @@
  <body>
 
   <body>  
-  <div class="container" style="width:500px; border:1px solid #ccc;">  
+   <div class="container box">  
+   <div class="form-group">  
+    <h3 align="center">Live Username Available or not By using PHP Ajax Jquery</h3><br />  
+    <label>Enter Username</label>  
+    <input type="text" name="username" id="username" class="form-control" onkeyup="myFunction()">
+    <span id="availability"></span>
+   </div>  
    <br />  
-   <h2 align="center">Login</h2>  
-   <form id="login_form">  
-    <label>Username</label>  
-    <input type="text" name="username" id="username" placeholder="Username" class="form-control" />  
-    <br />  
-    <label>Password</label>  
-    <input type="password" name="password" id="password" placeholder="Password" class="form-control" />  
-    <br />  
-    <button type="button" id="show_password" name="show_password" class="btn btn-default">Show Password</button>  
-   </form>  
-   <br />                 
-  </div>
+   <br />  
+  </div> 
 
-  <script src="{{ asset('js/test.js') }}"></script>
+  <script>
+    
+
+
+
+
+function myFunction(){
+
+    var name = $('#username').val();
+
+    $.ajax({
+
+        url:'/api/check/username',
+        data:{
+            name
+        },
+        success:function(result){
+
+            if (result == 'success') {
+                $('#availability').removeClass('text-danger').addClass('text-success').text('username availavle')
+            }
+
+            if (result == 'false') {
+                $('#availability').removeClass('text-success').addClass('text-danger').text('username not availavle')
+            }
+        }
+
+    })
+
+}
+
+
+
+
+
+
+  </script>
  </body>
 </html>
 
