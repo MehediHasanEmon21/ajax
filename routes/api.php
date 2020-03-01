@@ -17,8 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/upload-file','FileUploadController@upload_file')->name('upload.file');
-Route::get('/check/username','TestController@checkUsernameAvailable');
+
+Route::get('/auto/search','TestController@auto_search');
 
 
-Route::post('/product-by-price','TestController@product_by_price');
+

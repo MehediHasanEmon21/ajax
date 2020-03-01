@@ -7,39 +7,34 @@ use DB;
 
 class TestController extends Controller
 {
-    public function show_password_field(){
+  public function auto_search_view(){
 
-    	return view('show_password');
+    return view('auto-search');
+
+  }
+
+  public function auto_search(Request $request){
+
+    $query = $request->get('query');
+    $country = DB::table('locations')->select('country')->where('country','LIKE','%'.$query.'%')->distinct()->get();
+    $output = '';
+
+    $output .= '<ul class="list-unstlied" style="list-style:none">';
+
+    if (count($country) > 0) {
+        foreach ($country as   $row) {
+        $output .='<li>'.$row->country.'</li>';
+        }
+    }else{
+        $output .= '<li>No item found</li>';
     }
 
-    public function checkUsernameAvailable(Request $request){
+    $output .= '</ul>';
 
-    	$name = $request->name;
-
-    	$available = DB::table('tbl_users')->where('user_name',$name)->get();
-
-    	if (count($available) > 0) {
-    		return response()->json('false');
-    	}else{
-    		return response()->json('success');
-    	}
-
-    }
+    echo $output;
+    
 
 
 
-    public function product_load_by_price_view(){
-        $products = DB::table('product')->orderBy('product_id','DESC')->get();
-        return view('product_load_price',compact('products'));
-    }
-
-
-    public function product_by_price(Request $request){
-
-        $price = $request->price;
-
-        $products = DB::table('product')->where('product_price','<',$price)->orderBy('product_price')->get();
-        return view('response.filter_price_product',compact('products'));
-
-    }
+  }
 }
