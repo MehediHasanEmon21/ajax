@@ -17,3 +17,5 @@ Route::get('/', function () {
 
 Route::get('file-upload','FileUploadController@index');
 Route::get('show/password','TestController@show_password_field');
+
+Route::get('product_load_by_price','TestController@product_load_by_price_view');

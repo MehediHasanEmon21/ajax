@@ -25,4 +25,21 @@ class TestController extends Controller
     	}
 
     }
+
+
+
+    public function product_load_by_price_view(){
+        $products = DB::table('product')->orderBy('product_id','DESC')->get();
+        return view('product_load_price',compact('products'));
+    }
+
+
+    public function product_by_price(Request $request){
+
+        $price = $request->price;
+
+        $products = DB::table('product')->where('product_price','<',$price)->orderBy('product_price')->get();
+        return view('response.filter_price_product',compact('products'));
+
+    }
 }

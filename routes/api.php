@@ -19,3 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/upload-file','FileUploadController@upload_file')->name('upload.file');
 Route::get('/check/username','TestController@checkUsernameAvailable');
+
+
+Route::post('/product-by-price','TestController@product_by_price');
