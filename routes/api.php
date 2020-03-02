@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/auto/search','TestController@auto_search');
+Route::post('/update','TestController@update');
 
 
 

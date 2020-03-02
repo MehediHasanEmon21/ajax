@@ -7,29 +7,27 @@ use DB;
 
 class TestController extends Controller
 {
-  public function auto_search_view(){
+  public function edit_text_view(){
 
-    return view('auto-search');
+    $emp = DB::table('tbl_employee')->where('id',1)->first();
+    return view('editable-text',compact('emp'));
 
   }
 
-  public function auto_search(Request $request){
+  public function update(Request $request){
 
-    $query = $request->get('query');
-    $country = DB::table('locations')->select('country')->where('country','LIKE','%'.$query.'%')->distinct()->get();
-    $output = '';
+    $name = $request->name;
+    $gender = $request->gender;
+    $designation = $request->designation;
+    $employee_id = $request->employee_id;
 
-    $output .= '<ul class="list-unstlied" style="list-style:none">';
+    $country = DB::table('tbl_employee')->where('id',$employee_id)->update(['name' => $name, 'gender' => $gender, 'designation' => $designation]);
+    $emp = DB::table('tbl_employee')->where('id',$employee_id)->first();
 
-    if (count($country) > 0) {
-        foreach ($country as   $row) {
-        $output .='<li>'.$row->country.'</li>';
-        }
-    }else{
-        $output .= '<li>No item found</li>';
-    }
+    $output = '<p><strong>Name - </strong>'.$emp->name.'</p>  
+               <p><strong>Gender - </strong>'.$emp->gender.'</p>  
+               <p><strong>Designation - </strong>'.$emp->designation.'</p>';
 
-    $output .= '</ul>';
 
     echo $output;
     

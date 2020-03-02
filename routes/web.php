@@ -17,4 +17,4 @@ Route::get('/', function () {
 
 
 
-Route::get('auto-search','TestController@auto_search_view');
+Route::get('edit-text','TestController@edit_text_view');
