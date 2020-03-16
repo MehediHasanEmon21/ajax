@@ -18,7 +18,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::post('/update','TestController@update');
+Route::post('/fetch','TestController@fetch');
+Route::post('/post/add','TestController@post_add');
+Route::get('/fetch/post','TestController@fetch_post');
+Route::get('/fetch/user','TestController@fetch_user');
+Route::get('/follow/unfollow','TestController@follow_unfollow');
+Route::post('/add/comment','TestController@add_comment');
+Route::get('/fetch/comment','TestController@fetch_comment');
 
 
 
